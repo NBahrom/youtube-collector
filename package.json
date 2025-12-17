@@ -1,0 +1,16 @@
+{
+  "name": "youtube-channel-data-collector",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Collect structured data from YouTube channels using official APIs",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "dotenv": "^17.2.3",
+    "googleapis": "^169.0.0",
+    "p-limit": "^7.2.0"
+  }
+}
