@@ -11,6 +11,7 @@ export async function generateTranscript(videoId) {
 
     return text.trim();
   } catch (err) {
+    
     console.error(`STT failed for audio ${videoId}`, err.message);
     return null;
   }
