@@ -1,4 +1,3 @@
-import { google } from "googleapis";
 
 export async function resolveChannelId(youtube, channelUrl) {
   const url = new URL(channelUrl);
