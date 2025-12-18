@@ -1,29 +1,35 @@
 import { google } from "googleapis";
 
 export async function resolveChannelId(youtube, channelUrl) {
-  // Clean URL
   const url = new URL(channelUrl);
   const path = url.pathname;
 
-  // If direct /channel/ID
   if (path.startsWith("/channel/")) {
     return path.split("/channel/")[1];
   }
 
-  // If handle /@handle or /c/customname
-  let handleOrCustom = path.split("/").pop();
+  if (path.startsWith("/user/")) {
+    const username = path.split("/user/")[1];
+    const res = await youtube.channels.list({
+      part: ["id"],
+      forUsername: username
+    });
+    if (res.data.items?.length) return res.data.items[0].id;
+  }
 
-  // Use search.list to find channel
+  const handle = path.replace("/", "").replace("@", "");
+
   const res = await youtube.search.list({
     part: ["snippet"],
-    q: handleOrCustom,
+    q: handle,
     type: ["channel"],
     maxResults: 1
   });
 
-  if (!res.data.items || res.data.items.length === 0) {
-    throw new Error(`Channel not found for ${channelUrl}`);
+  if (!res.data.items?.length) {
+    throw new Error("Channel not found");
   }
 
   return res.data.items[0].snippet.channelId;
 }
+
