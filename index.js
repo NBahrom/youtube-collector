@@ -22,6 +22,7 @@ const channelUrl = process.argv[2];
 
   const videoId = "DlJ8yUKLk_k"; // test video short
   const transcript = await generateTranscript(videoId);
+  
   console.log(transcript);
 
 
