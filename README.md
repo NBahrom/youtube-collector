@@ -201,7 +201,97 @@ Install Node.js dependencies:
 6. Run the app once and complete OAuth login
 7. token.json will be created automatically
 
+## YouTube API Authorization (Required)
+
+This project uses the official YouTube Data API.
+
+Authorization is required to access channel and video data.
+
 ---
+
+## Step: Create Google API Credentials
+
+1. Go to Google Cloud Console
+
+   [https://console.cloud.google.com](https://console.cloud.google.com)
+2. Create a new project or select an existing one
+3. Enable **YouTube Data API v3**
+4. Go to **APIs and Services → Credentials**
+5. Click **Create Credentials → OAuth client ID**
+6. Choose **Desktop application**
+7. Download the file and rename it to:
+
+<pre class="overflow-visible! px-0!" data-start="813" data-end="837"><div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary"><div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>credentials.json
+</span></span></code></div></div></pre>
+
+---
+
+## Step: Place credentials.json
+
+Copy the file to the  **root folder of the project** :
+
+<pre class="overflow-visible! px-0!" data-start="931" data-end="1009"><div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary"><div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>project-root/
+├── credentials.json
+├── </span><span>index</span><span>.js
+├── src/
+└── README.md
+</span></span></code></div></div></pre>
+
+Do not rename the file to anything else.
+
+---
+
+## Step: Authorize the Application
+
+1. Run the project once:
+
+<pre class="overflow-visible! px-0!" data-start="1119" data-end="1191"><div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary"><div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>node index.js https://www.youtube.com/channel/UCxxxxxxxxxxxx
+</span></span></code></div></div></pre>
+
+2. A browser window will open asking for Google authorization
+3. Log in with your Google account
+4. Allow requested permissions
+5. After successful login, the app will create a file:
+
+<pre class="overflow-visible! px-0!" data-start="1379" data-end="1397"><div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary"><div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>token.json
+</span></span></code></div></div></pre>
+
+This file stores your access token and will be reused automatically.
+
+---
+
+## Important Notes
+
+* Authorization is required only once
+* After `token.json` is created, no further login is needed
+* Do not delete `token.json` unless you want to reauthorize
+* Do not commit `credentials.json` or `token.json` to GitHub
+
+---
+
+## .gitignore Recommendation
+
+Add the following lines to `.gitignore`:
+
+<pre class="overflow-visible! px-0!" data-start="1791" data-end="1826"><div class="contain-inline-size rounded-2xl corner-superellipse/1.1 relative bg-token-sidebar-surface-primary"><div class="@w-xl/main:top-9 sticky top-[calc(--spacing(9)+var(--header-height))]"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>credentials.json
+token.json
+</span></span></code></div></div></pre>
+
+This keeps your credentials safe.
+
+---
+
+## Common Authorization Issues
+
+### Access denied or app not verified
+
+* Add your Google account as a test user in Google Cloud Console
+* Use OAuth in testing mode
+
+### Quota exceeded
+
+* Wait for daily quota reset
+* Use direct channel ID URLs to reduce API usage
 
 ## Step 8: Run the Project
 
