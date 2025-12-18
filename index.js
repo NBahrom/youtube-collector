@@ -16,9 +16,15 @@ const channelUrl = process.argv[2];
   const channelId = resolveChannelIdFromUrl(channelUrl);
   const videos = await fetchAllVideos(youtube, channelId);
 
-  for (const video of videos) {
-    video.transcript = await generateTranscript(video.videoId);
-  }
+  // for (const video of videos) {
+  //   video.transcript = await generateTranscript(video.videoId);
+  // }
+
+  const videoId = "DlJ8yUKLk_k"; // test video short
+  const transcript = await generateTranscript(videoId);
+  console.log(transcript);
+
+
 
   await exportToCSV(videos);
 })();
